@@ -16,16 +16,23 @@ public class Managing : MonoBehaviour
     public GameObject prefab;
     int fOS; // first open slot
     public int gains = 10;
+    public int gems = 0;
 
     private int cost = 10;
 
     public TextMeshProUGUI gainText;
     public TextMeshProUGUI incomeText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI gemcostText;
+    public TextMeshProUGUI gemText;
 
-    
+
 
     public static int incomeRate;
+
+
+    public static bool rebirth;
+    private int rebirthCost;
     
     // Start is called before the first frame update
     void Start()
@@ -128,6 +135,42 @@ public class Managing : MonoBehaviour
         }
        
     }
+    public void Resbirth()
+    {
+        if (gains >= rebirthCost)
+        {
+            gains = 0;
+            rebirthCost += 10;
+            StartCoroutine(Redbirth());
+        }
+    }
+    public IEnumerator Redbirth()
+    {
+        rebirth = true;
+        yield return new WaitUntil(() => !rebirth);
+        Debug.Log("Destroyed");
+        Rebirth();
+        yield return null;
+    }
+    public void Rebirth()
+    {
+        Debug.Log("Reset");
+        
+        int tick = 0;
+
+
+       foreach (bool item in ocuupied)
+        {
+            ocuupied[tick] = false;
+            income[tick] = 0;
+            tick++;
+        }
+
+        gains = 10;
+        cost = 10;
+        gems += 50;
+        
+    }
 
     public void Update()
     {
@@ -140,6 +183,8 @@ public class Managing : MonoBehaviour
         incomeText.text = $"Income: {incomeRate}ps";
         gainText.text = $"${gains}";
         costText.text = $" Buy Item: {cost}";
+        gemcostText.text = $"Rebirth: {rebirthCost}";
+        gemText.text = $"{gems} gems";
     }
 
     public IEnumerator Income()

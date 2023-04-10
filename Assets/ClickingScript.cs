@@ -9,7 +9,7 @@ public class ClickingScript : MonoBehaviour
 {
 
     public static bool itemIsSelected;
-    public static int sIN; //selected item number
+    public static int sIN = -1; //selected item number
     public static GameObject selectedObject;
     private int pIN = 0; // personal item number
     private bool thisIsSelected;
@@ -27,6 +27,7 @@ public class ClickingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Managing.rebirth) { Destroy(this.gameObject); Managing.rebirth = false; }
         if (thisIsSelected)
         {
             mesh.material.color = Color.red;
@@ -41,7 +42,7 @@ public class ClickingScript : MonoBehaviour
 
         arrayLocation = Array.IndexOf(Managing.spawns, this.transform.position);
 
-        Managing.income[arrayLocation] = (Mathf.Pow(2, 2 *pIN));
+        Managing.income[arrayLocation] = (Mathf.Pow(2, 1.5f *pIN));
         
     }
 
@@ -56,7 +57,7 @@ public class ClickingScript : MonoBehaviour
             {
                 selectedObject.GetComponent<ClickingScript>().destroySelf();
                 pIN++;
-                sIN= 0;
+                sIN= -1;
                 itemIsSelected = false;
             }
             else if(thisIsSelected)
