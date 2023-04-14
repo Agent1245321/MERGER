@@ -9,10 +9,14 @@ using UnityEngine.UI;
 using TMPro;
 public class Managing : MonoBehaviour
 {
-
+    
     public static Vector3[] spawns;
-    public static bool[] ocuupied;
-    public static float[] income;
+    [SerializeField]
+    public  bool[] ocuupied;
+    [SerializeField]
+    public  float[] income;
+
+
     public GameObject prefab;
     int fOS; // first open slot
     public int gains = 10;
@@ -31,7 +35,7 @@ public class Managing : MonoBehaviour
     public static int incomeRate;
 
 
-    public static bool rebirth;
+    public bool rebirth;
     private int rebirthCost;
     
     // Start is called before the first frame update
@@ -73,7 +77,7 @@ public class Managing : MonoBehaviour
             new Vector3(25, 1, -5),
             };
 
-
+        
         ocuupied = new bool[]
         {
             false,
@@ -112,7 +116,7 @@ public class Managing : MonoBehaviour
 
         };
 
-
+        
         income = new float[]
         {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -135,8 +139,9 @@ public class Managing : MonoBehaviour
         }
        
     }
-    public void Resbirth()
+   /* public void Resbirth()
     {
+        Debug.Log("Res");
         if (gains >= rebirthCost)
         {
             gains = 0;
@@ -146,16 +151,18 @@ public class Managing : MonoBehaviour
     }
     public IEnumerator Redbirth()
     {
+        Debug.Log("Red");
         rebirth = true;
-        yield return new WaitUntil(() => !rebirth);
+        bool emptyList = ocuupied.All(element => element = false);
+        yield return new WaitUntil(() => emptyList == true);
         Debug.Log("Destroyed");
         Rebirth();
         yield return null;
     }
     public void Rebirth()
     {
-        Debug.Log("Reset");
-        
+        Debug.Log("Reb");
+
         int tick = 0;
 
 
@@ -169,7 +176,23 @@ public class Managing : MonoBehaviour
         gains = 10;
         cost = 10;
         gems += 50;
+        rebirth = false;
+        Debug.Log("I Reset It");
+
         
+    }
+
+    */
+
+
+    public void Rebirth1()
+    {
+        rebirth = true;
+    }
+
+    public void Rebirth2()
+    {
+        gems += 50;
     }
 
     public void Update()
@@ -196,4 +219,7 @@ public class Managing : MonoBehaviour
         }
 
     }
+
+
+    // MAKE A DANG GAME OBJCT ARRAY
 }

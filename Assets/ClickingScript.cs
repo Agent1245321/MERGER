@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class ClickingScript : MonoBehaviour
 {
-
+    private Managing managing;
     public static bool itemIsSelected;
     public static int sIN = -1; //selected item number
     public static GameObject selectedObject;
@@ -20,14 +20,15 @@ public class ClickingScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         mesh = this.GetComponent<MeshRenderer>();
+        managing = GameObject.FindWithTag("Manager").GetComponent<Managing>();
+        mesh = this.GetComponent<MeshRenderer>();
       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Managing.rebirth) { Destroy(this.gameObject); Managing.rebirth = false; }
+        if (managing.rebirth) { DestroySelf(); }
         if (thisIsSelected)
         {
             mesh.material.color = Color.red;
@@ -42,8 +43,9 @@ public class ClickingScript : MonoBehaviour
 
         arrayLocation = Array.IndexOf(Managing.spawns, this.transform.position);
 
-        Managing.income[arrayLocation] = (Mathf.Pow(2, 1.5f *pIN));
-        
+        if(!managing.rebirth) managing.income[arrayLocation] = (Mathf.Pow(2, 1.5f * pIN));
+
+
     }
 
     private void OnMouseOver()
@@ -55,7 +57,7 @@ public class ClickingScript : MonoBehaviour
 
             else if (sIN == pIN && !thisIsSelected) 
             {
-                selectedObject.GetComponent<ClickingScript>().destroySelf();
+                selectedObject.GetComponent<ClickingScript>().DestroySelf();
                 pIN++;
                 sIN= -1;
                 itemIsSelected = false;
@@ -75,11 +77,28 @@ public class ClickingScript : MonoBehaviour
 
     
 
-    public void destroySelf()
+    public void DestroySelf()
     {
-        Managing.income[arrayLocation] = 0;
-        Managing.ocuupied[arrayLocation] = false;
-        if (thisIsSelected) { Destroy(this.gameObject); }
+        managing.income[arrayLocation] = 0;
+        managing.ocuupied[arrayLocation] = false;
+        if (thisIsSelected && !managing.rebirth) { Destroy(this.transform.root.gameObject); }
+
+        if (managing.rebirth)
+        {
+           if(Managing.incomeRate == (int)Mathf.Pow(2, 1.5f * pIN))
+            {
+                Debug.Log("This is the last one");
+                managing.rebirth = false;
+                
+                Destroy(this.transform.root.gameObject);
+                managing.Rebirth2();
+            }
+           else
+            {
+                Debug.Log("This is not last one");
+                Destroy(this.transform.root.gameObject);
+            }
+        }
     }
 
 }

@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 158039792}
   m_Layer: 0
   m_Name: Manager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c11c348a3f9ae43bd34200c6405819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ocuupied: 
+  income: []
   prefab: {fileID: 3065136598031149085, guid: 35b5bbcad021abb4cbdd9f0a092b233a, type: 3}
   gains: 10
   gems: 0
@@ -256,6 +258,7 @@ MonoBehaviour:
   costText: {fileID: 2035173150}
   gemcostText: {fileID: 1750690067}
   gemText: {fileID: 1521704082}
+  rebirth: 0
 --- !u!4 &158039793
 Transform:
   m_ObjectHideFlags: 0
@@ -1370,7 +1373,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 158039792}
         m_TargetAssemblyTypeName: Managing, Assembly-CSharp
-        m_MethodName: Resbirth
+        m_MethodName: Rebirth1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
