@@ -41,85 +41,9 @@ public class Managing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawns = new Vector3[] 
-          { new Vector3(-25, 1, 5), 
-            new Vector3(-20, 1, 5), 
-            new Vector3(-15, 1, 5), 
-            new Vector3(-10, 1, 5), 
-            new Vector3(-5, 1, 5), 
-            new Vector3(0, 1, 5), 
-            new Vector3(5, 1, 5),
-            new Vector3(10,1,5),
-            new Vector3(15, 1, 5), 
-            new Vector3(20,1,5),
-            new Vector3(25, 1, 5),
-            new Vector3(-25, 1, 0),
-            new Vector3(-20, 1, 0),
-            new Vector3(-15, 1, 0),
-            new Vector3(-10, 1, 0),
-            new Vector3(-5, 1, 0),
-            new Vector3(0, 1, 0),
-            new Vector3(5, 1, 0),
-            new Vector3(10,1,0),
-            new Vector3(15, 1, 0),
-            new Vector3(20,1,0),
-            new Vector3(25, 1, 0),
-            new Vector3(-25, 1, -5),
-            new Vector3(-20, 1, -5),
-            new Vector3(-15, 1, -5),
-            new Vector3(-10, 1, -5),
-            new Vector3(-5, 1, -5),
-            new Vector3(0, 1, -5),
-            new Vector3(5, 1, -5),
-            new Vector3(10,1,-5),
-            new Vector3(15, 1, -5),
-            new Vector3(20,1,-5),
-            new Vector3(25, 1, -5),
-            };
-
-        
-        ocuupied = new bool[]
+        GameObject[] item = new GameObject[]
         {
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-
-        };
-
-        
-        income = new float[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null
         };
 
         StartCoroutine(Income());
